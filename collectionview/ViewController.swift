@@ -11,7 +11,22 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var collectionview: UICollectionView!
     
-    let arrayLabels = ["1 😘", "2 😎", "3 😡" , "4 💄", "5 🗼","6 🚕","7 🙋‍♀️","8 💰","9 👩‍🔧"]
+    var arrayLabels = ["1 😘", "2 😎", "3 😡" , "4 💄", "5 🗼","6 🚕","7 🙋‍♀️","8 💰","9 👩‍🔧"]
+    
+    @IBAction func addLabels(_ sender: UIBarButtonItem) {
+        collectionview.performBatchUpdates({
+            for i in 0x1F601...0x1F605 {
+                
+                let text = "\(arrayLabels.count+1) \(UnicodeScalar(i)!)"
+                arrayLabels.append(text)
+                
+                let index = IndexPath(item: arrayLabels.count-1, section: 0)
+                collectionview.insertItems(at: [index])
+            }
+        }, completion: nil)
+    }
+    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,14 +53,14 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        if segue.identifier == "OpenDetailsViewController"{
-    //            if let dest = segue.destination as? DetailsViewController,
-    //                let index = collectionview.indexPathsForSelectedItems?.first {
-    //                dest.selectionText = arrayLabels[index.row]
-    //            }
-    //        }
-    //    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "OpenDetailsViewController"{
+            if let dest = segue.destination as? DetailsViewController,
+                let index = sender as? IndexPath {
+                dest.selectionText = arrayLabels[index.row]
+            }
+        }
+    }
     
 }
 
@@ -62,13 +77,16 @@ extension ViewController: UICollectionViewDataSource , UICollectionViewDelegate 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController {
-        vc.selectionText = arrayLabels[indexPath.row]
-        self.navigationController?.pushViewController(vc, animated: true)
-        print("text is \(String(describing: arrayLabels[indexPath.row]))")
-        }
+        
+        performSegue(withIdentifier: "OpenDetailsViewController", sender: indexPath)
+        
+        //        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController {
+        //        vc.selectionText = arrayLabels[indexPath.row]
+        //        self.navigationController?.pushViewController(vc, animated: true)
+        //        print("text is \(String(describing: arrayLabels[indexPath.row]))")
     }
-    
-    
 }
+
+
+
 

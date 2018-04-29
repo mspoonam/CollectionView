@@ -65,9 +65,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Vhe-h8-eex"/>
+                    <navigationItem key="navigationItem" id="Vhe-h8-eex">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="8fz-0S-Rjm">
+                            <connections>
+                                <action selector="addLabels:" destination="BYZ-38-t0r" id="Tso-xv-0EC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionview" destination="wB6-vf-C7L" id="Onx-5l-WKZ"/>
+                        <segue destination="ldh-gm-U0c" kind="show" identifier="OpenDetailsViewController" id="KG2-7p-mIJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
