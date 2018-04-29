@@ -68,7 +68,7 @@
                     <navigationItem key="navigationItem" id="Vhe-h8-eex">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8fz-0S-Rjm">
                             <connections>
-                                <action selector="addLabels:" destination="BYZ-38-t0r" id="Tso-xv-0EC"/>
+                                <action selector="addLabels" destination="BYZ-38-t0r" id="LVU-P9-ljQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

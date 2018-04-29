@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     
     var arrayLabels = ["1 😘", "2 😎", "3 😡" , "4 💄", "5 🗼","6 🚕","7 🙋‍♀️","8 💰","9 👩‍🔧"]
     
-    @IBAction func addLabels(_ sender: UIBarButtonItem) {
+    @IBAction func addLabels() {
         collectionview.performBatchUpdates({
             for i in 0x1F601...0x1F605 {
                 
@@ -26,11 +26,18 @@ class ViewController: UIViewController {
         }, completion: nil)
     }
     
-   
+    @objc func refresh(){
+        self.addLabels()
+        collectionview.refreshControl?.endRefreshing()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
+        collectionview.refreshControl = refresh
         
         let width = (view.frame.size.width - 8) / 3
         let layout = collectionview.collectionViewLayout as? UICollectionViewFlowLayout
