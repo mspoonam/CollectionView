@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var collectionview: UICollectionView!
     
+    @IBOutlet weak var addButton: UIBarButtonItem!
     var arrayLabels = ["1 😘", "2 😎", "3 😡" , "4 💄", "5 🗼","6 🚕","7 🙋‍♀️","8 💰","9 👩‍🔧"]
     
     @IBAction func addLabels() {
@@ -38,6 +39,7 @@ class ViewController: UIViewController {
         let refresh = UIRefreshControl()
         refresh.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
         collectionview.refreshControl = refresh
+        navigationItem.leftBarButtonItem = editButtonItem
         
         let width = (view.frame.size.width - 8) / 3
         let layout = collectionview.collectionViewLayout as? UICollectionViewFlowLayout
@@ -69,6 +71,10 @@ class ViewController: UIViewController {
         }
     }
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        self.addButton.isEnabled = !editing
+    }
 }
 
 extension ViewController: UICollectionViewDataSource , UICollectionViewDelegate {

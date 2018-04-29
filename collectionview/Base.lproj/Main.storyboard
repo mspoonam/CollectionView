@@ -73,6 +73,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="8fz-0S-Rjm" id="jOm-ck-1hY"/>
                         <outlet property="collectionview" destination="wB6-vf-C7L" id="Onx-5l-WKZ"/>
                         <segue destination="ldh-gm-U0c" kind="show" identifier="OpenDetailsViewController" id="KG2-7p-mIJ"/>
                     </connections>
